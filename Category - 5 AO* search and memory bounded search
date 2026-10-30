@@ -1,0 +1,44 @@
+# AO* Search - Simple AND-OR graph example
+
+graph = {
+    'A': [['B', 'C'], ['D']],
+    'B': [['E']],
+    'C': [['F']],
+    'D': [['G']],
+    'E': [], 'F': [], 'G': []
+}
+
+cost = {'A': 0, 'B': 2, 'C': 2,
+        'D': 3, 'E': 1, 'F': 1, 'G': 1}
+
+def ao_star(node):
+    if not graph[node]:
+        return cost[node]
+
+    values = []
+    for option in graph[node]:
+        values.append(sum(ao_star(n) for n in option))
+
+    return cost[node] + min(values)
+
+print("AO* Minimum Cost:", ao_star('A'))
+
+# Memory Bounded Search (Beam Search)
+
+def beam_search(graph, start, goal, width):
+    beam = [start]
+
+    while beam:
+        if goal in beam:
+            return goal
+
+        candidates = []
+        for node in beam:
+            candidates.extend(graph[node])
+
+        beam = candidates[:width]
+
+    return "Not Found"
+
+print("Memory Bounded Search:",
+      beam_search(graph, 'A', 'G', 2))
