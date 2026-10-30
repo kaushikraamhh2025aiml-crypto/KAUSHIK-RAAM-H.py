@@ -1,1 +1,1 @@
-Category - 1
+Category -1
