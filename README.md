@@ -1,1 +1,0 @@
-Principal of Artificial intelligence 
