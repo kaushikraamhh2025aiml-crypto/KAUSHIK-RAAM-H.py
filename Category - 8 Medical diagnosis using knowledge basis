@@ -1,0 +1,27 @@
+# Facts
+facts = {
+    "fever": True,
+    "cough": True,
+    "cold": True
+}
+
+# Rules
+def forward_chaining(facts):
+    if facts["fever"] and facts["cough"]:
+        return "Possible Flu"
+    elif facts["cold"] and facts["cough"]:
+        return "Possible Common Cold"
+    return "No Diagnosis"
+
+# Forward Chaining
+print("Forward Chaining:")
+print("Diagnosis:", forward_chaining(facts))
+
+# Backward Chaining
+def backward_chaining(goal, facts):
+    if goal == "Possible Flu":
+        return facts["fever"] and facts["cough"]
+    return False
+
+print("\nBackward Chaining:")
+print("Possible Flu:", backward_chaining("Possible Flu", facts))
