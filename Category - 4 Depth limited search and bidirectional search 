@@ -1,0 +1,47 @@
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+def dfs(node, goal, visited):
+    if node == goal:
+        return True
+    if node in visited:
+        return False
+
+    visited.add(node)
+    for child in graph[node]:
+        if dfs(child, goal, visited):
+            return True
+    return False
+
+def dls(node, goal, limit):
+    if node == goal:
+        return True
+    if limit <= 0:
+        return False
+
+    return any(dls(child, goal, limit - 1)
+               for child in graph[node])
+
+def bidirectional(start, goal):
+    forward = {start}
+    backward = {goal}
+
+    while forward and backward:
+        if forward & backward:
+            return True
+
+        forward = {child for n in forward for child in graph[n]}
+        backward = {n for n in graph
+                    if any(child in backward for child in graph[n])}
+
+    return False
+
+print("DFS:", dfs('A', 'F', set()))
+print("DLS:", dls('A', 'F', 2))
+print("Bidirectional:", bidirectional('A', 'F'))
