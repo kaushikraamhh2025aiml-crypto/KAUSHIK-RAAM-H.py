@@ -1,0 +1,19 @@
+# Fully Observable Environment
+environment = ["Clean", "Dirty", "Clean", "Dirty"]
+
+print("Fully Observable Agent")
+for room in environment:
+    if room == "Dirty":
+        print("Room is Dirty - Cleaning")
+    else:
+        print("Room is Clean")
+
+# Partially Observable Environment
+print("\nPartially Observable Agent")
+for room in environment:
+    perception = room if room == "Dirty" else "Unknown"
+    print("Perception:", perception)
+    if perception == "Dirty":
+        print("Action: Clean")
+    else:
+        print("Action: Move")
