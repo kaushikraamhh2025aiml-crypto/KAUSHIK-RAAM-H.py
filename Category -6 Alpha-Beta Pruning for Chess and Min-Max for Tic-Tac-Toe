@@ -1,0 +1,41 @@
+# Alpha-Beta Pruning
+
+def alphabeta(tree, alpha, beta, maximizing):
+    if isinstance(tree, int):
+        return tree
+
+    if maximizing:
+        value = -999
+        for child in tree:
+            value = max(value, alphabeta(child, alpha, beta, False))
+            alpha = max(alpha, value)
+            if alpha >= beta:
+                break
+        return value
+
+    else:
+        value = 999
+        for child in tree:
+            value = min(value, alphabeta(child, alpha, beta, True))
+            beta = min(beta, value)
+            if beta <= alpha:
+                break
+        return value
+
+tree = [[3, 5], [2, 9]]
+print("Alpha-Beta Best Value:",
+      alphabeta(tree, -999, 999, True))
+
+
+# Min-Max Tic-Tac-Toe
+
+def minimax_ttt(board, player):
+    if "X" not in board and "O" not in board:
+        return 0
+
+    if player == "X":
+        return 1
+    return -1
+
+board = ["X", "O", "X", "O", "X", "O", "O", "X", "O"]
+print("Tic-Tac-Toe Evaluation:", minimax_ttt(board, "X"))
