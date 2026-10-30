@@ -1,1 +1,1 @@
-Category - 1
+Principal of Artificial intelligence 
