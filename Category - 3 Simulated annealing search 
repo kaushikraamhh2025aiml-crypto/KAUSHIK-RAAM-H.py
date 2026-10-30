@@ -1,0 +1,20 @@
+import random
+import math
+
+def fitness(x):
+    return -(x - 5) ** 2 + 25
+
+x = random.randint(0, 10)
+T = 100
+
+while T > 0.1:
+    new_x = max(0, min(10, x + random.choice([-1, 1])))
+    diff = fitness(new_x) - fitness(x)
+
+    if diff > 0 or random.random() < math.exp(diff / T):
+        x = new_x
+
+    T *= 0.95
+
+print("Best Solution:", x)
+print("Maximum Fitness:", fitness(x))
