@@ -1,0 +1,42 @@
+# Knowledge Base - Facts
+facts = {
+    "obstacle": True,
+    "traffic_signal": "Red",
+    "machine_temperature": 90,
+    "machine_fault": True
+}
+
+# Autonomous Vehicle - Forward Chaining
+def vehicle():
+    if facts["obstacle"]:
+        return "Apply Brake"
+    elif facts["traffic_signal"] == "Red":
+        return "Stop Vehicle"
+    return "Move Forward"
+
+# Industrial Manufacturing - Forward Chaining
+def manufacturing():
+    if facts["machine_temperature"] > 80:
+        return "Activate Cooling System"
+    elif facts["machine_fault"]:
+        return "Stop Machine"
+    return "Continue Production"
+
+# Backward Chaining
+def backward_chaining(goal):
+    if goal == "Apply Brake":
+        return facts["obstacle"]
+    if goal == "Activate Cooling System":
+        return facts["machine_temperature"] > 80
+    return False
+
+print("Autonomous Vehicle:")
+print(vehicle())
+
+print("\nIndustrial Manufacturing:")
+print(manufacturing())
+
+print("\nBackward Chaining:")
+print("Apply Brake:", backward_chaining("Apply Brake"))
+print("Cooling Required:",
+      backward_chaining("Activate Cooling System"))
