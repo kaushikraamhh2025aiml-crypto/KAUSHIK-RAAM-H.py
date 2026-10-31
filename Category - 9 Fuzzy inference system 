@@ -1,0 +1,61 @@
+
+
+def fuzzy_inference(value):
+
+    if value <= 30:
+        low = 1
+    elif value <= 50:
+        low = (50 - value) / 20
+    else:
+        low = 0
+
+    if value <= 30 or value >= 70:
+        medium = 0
+    elif value <= 50:
+        medium = (value - 30) / 20
+    else:
+        medium = (70 - value) / 20
+
+    if value <= 50:
+        high = 0
+    elif value <= 70:
+        high = (value - 50) / 20
+    else:
+        high = 1
+
+    # Fuzzy rules
+    if high > medium and high > low:
+        result = "HIGH RISK"
+    elif medium > low:
+        result = "MEDIUM RISK"
+    else:
+        result = "LOW RISK"
+
+    return result
+
+
+print("FUZZY INFERENCE SYSTEM")
+print("1. Medical Diagnosis")
+print("2. Electric Vehicle")
+print("3. Autonomous Vehicle")
+print("4. Smart Manufacturing")
+
+choice = int(input("Enter your choice: "))
+
+value = float(input("Enter input value (0-100): "))
+
+if choice in [1, 2, 3, 4] and 0 <= value <= 100:
+
+    applications = {
+        1: "Medical Diagnosis",
+        2: "Electric Vehicle",
+        3: "Autonomous Vehicle",
+        4: "Smart Manufacturing"
+    }
+
+    print("\nApplication:", applications[choice])
+    print("Input Value:", value)
+    print("Fuzzy Result:", fuzzy_inference(value))
+
+else:
+    print("Invalid Input")
