@@ -1,0 +1,45 @@
+
+
+def bayesian_reasoning(prior, likelihood, false_likelihood):
+    numerator = likelihood * prior
+    denominator = numerator + false_likelihood * (1 - prior)
+
+    posterior = numerator / denominator
+
+    return posterior * 100
+
+
+print("BAYESIAN REASONING SYSTEM")
+print("1. Medical Diagnosis")
+print("2. Electric Vehicle")
+print("3. Autonomous Vehicle")
+print("4. Smart Manufacturing")
+
+choice = int(input("Enter your choice: "))
+
+if choice == 1:
+    print("Medical Diagnosis")
+    result = bayesian_reasoning(0.20, 0.80, 0.30)
+
+elif choice == 2:
+    print("Electric Vehicle")
+    result = bayesian_reasoning(0.15, 0.85, 0.20)
+
+elif choice == 3:
+    print("Autonomous Vehicle")
+    result = bayesian_reasoning(0.10, 0.90, 0.15)
+
+elif choice == 4:
+    print("Smart Manufacturing")
+    result = bayesian_reasoning(0.25, 0.80, 0.20)
+
+else:
+    print("Invalid Choice")
+    exit()
+
+print("Probability:", round(result, 2), "%")
+
+if result >= 50:
+    print("High Probability of Risk")
+else:
+    print("Low Probability of Risk")
