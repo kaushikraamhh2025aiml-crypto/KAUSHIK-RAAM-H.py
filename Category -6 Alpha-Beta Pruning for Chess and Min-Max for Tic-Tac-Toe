@@ -1,3 +1,5 @@
+1)
+
 # Alpha-Beta Pruning
 
 def alphabeta(tree, alpha, beta, maximizing):
@@ -39,3 +41,24 @@ def minimax_ttt(board, player):
 
 board = ["X", "O", "X", "O", "X", "O", "O", "X", "O"]
 print("Tic-Tac-Toe Evaluation:", minimax_ttt(board, "X"))
+
+2)
+
+def minimax(tree, depth, maximizing):
+    if isinstance(tree, int):
+        return tree
+
+    if maximizing:
+        best = -999
+        for child in tree:
+            best = max(best, minimax(child, depth + 1, False))
+        return best
+    else:
+        best = 999
+        for child in tree:
+            best = min(best, minimax(child, depth + 1, True))
+        return best
+
+tree = [[3, 5], [2, 9]]
+
+print("Best Chess Move Value:", minimax(tree, 0, True))
